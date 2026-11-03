@@ -11,6 +11,7 @@ services:
       - .:/app
       - /app/node_modules
       - /app/frontend/node_modules
+      - /app/shared/node_modules
     environment:
       WATCHPACK_POLLING: "true"
     depends_on:
@@ -29,6 +30,7 @@ services:
       - .:/app
       - /app/node_modules
       - /app/backend/node_modules
+      - /app/shared/node_modules
     environment:
       WATCHPACK_POLLING: "true"
     depends_on:
