@@ -47,6 +47,10 @@ export class CategoryRepository {
     };
   }
 
+  async findAllCategories() {
+    return this.prisma.category.findMany();
+  }
+
   async update(body: UpdateCategorySchemaType, id: string) {
     return this.prisma.category.update({
       where: { id },

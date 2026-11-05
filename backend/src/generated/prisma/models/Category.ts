@@ -245,7 +245,7 @@ export type CategoryCreateInput = {
   color?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  products?: Prisma.ProductCreateNestedManyWithoutCategoriesInput;
+  products?: Prisma.ProductCreateNestedManyWithoutCategoryInput;
 };
 
 export type CategoryUncheckedCreateInput = {
@@ -254,7 +254,7 @@ export type CategoryUncheckedCreateInput = {
   color?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoriesInput;
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutCategoryInput;
 };
 
 export type CategoryUpdateInput = {
@@ -263,7 +263,7 @@ export type CategoryUpdateInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  products?: Prisma.ProductUpdateManyWithoutCategoriesNestedInput;
+  products?: Prisma.ProductUpdateManyWithoutCategoryNestedInput;
 };
 
 export type CategoryUncheckedUpdateInput = {
@@ -272,7 +272,7 @@ export type CategoryUncheckedUpdateInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  products?: Prisma.ProductUncheckedUpdateManyWithoutCategoriesNestedInput;
+  products?: Prisma.ProductUncheckedUpdateManyWithoutCategoryNestedInput;
 };
 
 export type CategoryCreateManyInput = {
@@ -299,14 +299,9 @@ export type CategoryUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 
-export type CategoryListRelationFilter = {
-  every?: Prisma.CategoryWhereInput;
-  some?: Prisma.CategoryWhereInput;
-  none?: Prisma.CategoryWhereInput;
-};
-
-export type CategoryOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder;
+export type CategoryNullableScalarRelationFilter = {
+  is?: Prisma.CategoryWhereInput | null;
+  isNot?: Prisma.CategoryWhereInput | null;
 };
 
 export type CategoryCountOrderByAggregateInput = {
@@ -333,90 +328,32 @@ export type CategoryMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder;
 };
 
-export type CategoryCreateNestedManyWithoutProductsInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.CategoryCreateWithoutProductsInput,
-        Prisma.CategoryUncheckedCreateWithoutProductsInput
-      >
-    | Prisma.CategoryCreateWithoutProductsInput[]
-    | Prisma.CategoryUncheckedCreateWithoutProductsInput[];
-  connectOrCreate?:
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput[];
-  connect?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
+export type CategoryCreateNestedOneWithoutProductsInput = {
+  create?: Prisma.XOR<
+    Prisma.CategoryCreateWithoutProductsInput,
+    Prisma.CategoryUncheckedCreateWithoutProductsInput
+  >;
+  connectOrCreate?: Prisma.CategoryCreateOrConnectWithoutProductsInput;
+  connect?: Prisma.CategoryWhereUniqueInput;
 };
 
-export type CategoryUncheckedCreateNestedManyWithoutProductsInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.CategoryCreateWithoutProductsInput,
-        Prisma.CategoryUncheckedCreateWithoutProductsInput
-      >
-    | Prisma.CategoryCreateWithoutProductsInput[]
-    | Prisma.CategoryUncheckedCreateWithoutProductsInput[];
-  connectOrCreate?:
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput[];
-  connect?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-};
-
-export type CategoryUpdateManyWithoutProductsNestedInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.CategoryCreateWithoutProductsInput,
-        Prisma.CategoryUncheckedCreateWithoutProductsInput
-      >
-    | Prisma.CategoryCreateWithoutProductsInput[]
-    | Prisma.CategoryUncheckedCreateWithoutProductsInput[];
-  connectOrCreate?:
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput[];
-  upsert?:
-    | Prisma.CategoryUpsertWithWhereUniqueWithoutProductsInput
-    | Prisma.CategoryUpsertWithWhereUniqueWithoutProductsInput[];
-  set?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  disconnect?:
-    Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  delete?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  connect?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  update?:
-    | Prisma.CategoryUpdateWithWhereUniqueWithoutProductsInput
-    | Prisma.CategoryUpdateWithWhereUniqueWithoutProductsInput[];
-  updateMany?:
-    | Prisma.CategoryUpdateManyWithWhereWithoutProductsInput
-    | Prisma.CategoryUpdateManyWithWhereWithoutProductsInput[];
-  deleteMany?:
-    Prisma.CategoryScalarWhereInput | Prisma.CategoryScalarWhereInput[];
-};
-
-export type CategoryUncheckedUpdateManyWithoutProductsNestedInput = {
-  create?:
-    | Prisma.XOR<
-        Prisma.CategoryCreateWithoutProductsInput,
-        Prisma.CategoryUncheckedCreateWithoutProductsInput
-      >
-    | Prisma.CategoryCreateWithoutProductsInput[]
-    | Prisma.CategoryUncheckedCreateWithoutProductsInput[];
-  connectOrCreate?:
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput
-    | Prisma.CategoryCreateOrConnectWithoutProductsInput[];
-  upsert?:
-    | Prisma.CategoryUpsertWithWhereUniqueWithoutProductsInput
-    | Prisma.CategoryUpsertWithWhereUniqueWithoutProductsInput[];
-  set?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  disconnect?:
-    Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  delete?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  connect?: Prisma.CategoryWhereUniqueInput | Prisma.CategoryWhereUniqueInput[];
-  update?:
-    | Prisma.CategoryUpdateWithWhereUniqueWithoutProductsInput
-    | Prisma.CategoryUpdateWithWhereUniqueWithoutProductsInput[];
-  updateMany?:
-    | Prisma.CategoryUpdateManyWithWhereWithoutProductsInput
-    | Prisma.CategoryUpdateManyWithWhereWithoutProductsInput[];
-  deleteMany?:
-    Prisma.CategoryScalarWhereInput | Prisma.CategoryScalarWhereInput[];
+export type CategoryUpdateOneWithoutProductsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.CategoryCreateWithoutProductsInput,
+    Prisma.CategoryUncheckedCreateWithoutProductsInput
+  >;
+  connectOrCreate?: Prisma.CategoryCreateOrConnectWithoutProductsInput;
+  upsert?: Prisma.CategoryUpsertWithoutProductsInput;
+  disconnect?: Prisma.CategoryWhereInput | boolean;
+  delete?: Prisma.CategoryWhereInput | boolean;
+  connect?: Prisma.CategoryWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.CategoryUpdateToOneWithWhereWithoutProductsInput,
+      Prisma.CategoryUpdateWithoutProductsInput
+    >,
+    Prisma.CategoryUncheckedUpdateWithoutProductsInput
+  >;
 };
 
 export type CategoryCreateWithoutProductsInput = {
@@ -443,8 +380,7 @@ export type CategoryCreateOrConnectWithoutProductsInput = {
   >;
 };
 
-export type CategoryUpsertWithWhereUniqueWithoutProductsInput = {
-  where: Prisma.CategoryWhereUniqueInput;
+export type CategoryUpsertWithoutProductsInput = {
   update: Prisma.XOR<
     Prisma.CategoryUpdateWithoutProductsInput,
     Prisma.CategoryUncheckedUpdateWithoutProductsInput
@@ -453,33 +389,15 @@ export type CategoryUpsertWithWhereUniqueWithoutProductsInput = {
     Prisma.CategoryCreateWithoutProductsInput,
     Prisma.CategoryUncheckedCreateWithoutProductsInput
   >;
+  where?: Prisma.CategoryWhereInput;
 };
 
-export type CategoryUpdateWithWhereUniqueWithoutProductsInput = {
-  where: Prisma.CategoryWhereUniqueInput;
+export type CategoryUpdateToOneWithWhereWithoutProductsInput = {
+  where?: Prisma.CategoryWhereInput;
   data: Prisma.XOR<
     Prisma.CategoryUpdateWithoutProductsInput,
     Prisma.CategoryUncheckedUpdateWithoutProductsInput
   >;
-};
-
-export type CategoryUpdateManyWithWhereWithoutProductsInput = {
-  where: Prisma.CategoryScalarWhereInput;
-  data: Prisma.XOR<
-    Prisma.CategoryUpdateManyMutationInput,
-    Prisma.CategoryUncheckedUpdateManyWithoutProductsInput
-  >;
-};
-
-export type CategoryScalarWhereInput = {
-  AND?: Prisma.CategoryScalarWhereInput | Prisma.CategoryScalarWhereInput[];
-  OR?: Prisma.CategoryScalarWhereInput[];
-  NOT?: Prisma.CategoryScalarWhereInput | Prisma.CategoryScalarWhereInput[];
-  id?: Prisma.StringFilter<'Category'> | string;
-  name?: Prisma.StringFilter<'Category'> | string;
-  color?: Prisma.StringNullableFilter<'Category'> | string | null;
-  createdAt?: Prisma.DateTimeFilter<'Category'> | Date | string;
-  updatedAt?: Prisma.DateTimeFilter<'Category'> | Date | string;
 };
 
 export type CategoryUpdateWithoutProductsInput = {
@@ -491,14 +409,6 @@ export type CategoryUpdateWithoutProductsInput = {
 };
 
 export type CategoryUncheckedUpdateWithoutProductsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string;
-  name?: Prisma.StringFieldUpdateOperationsInput | string;
-  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-};
-
-export type CategoryUncheckedUpdateManyWithoutProductsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string;
   name?: Prisma.StringFieldUpdateOperationsInput | string;
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;

@@ -26,10 +26,12 @@ import {
 import { ZodValidationPipe } from '../../../common/pipes/zod-validation.pipe';
 import { CreateProductSwagger, UpdateProductSwagger } from '../swagger';
 import {
+  ChangeQuantityProductUsecase,
   CreateProductUsecase,
   DeleteProductUsecase,
   FindAllProductUsecase,
   FindByIdProductUsecase,
+  GetDashboardOverviewUseCase,
   UpdateProductUsecase,
 } from '../use-case';
 
@@ -41,7 +43,9 @@ export class ProductController {
     private readonly findAllProductUsecase: FindAllProductUsecase,
     private readonly findByIdProductUsecase: FindByIdProductUsecase,
     private readonly updateProductUsecase: UpdateProductUsecase,
+    private readonly changeQuantityProductUsecase: ChangeQuantityProductUsecase,
     private readonly deleteProductUsecase: DeleteProductUsecase,
+    private readonly getDashboardOverviewUsecase: GetDashboardOverviewUseCase,
   ) {}
 
   @Post()
@@ -73,6 +77,30 @@ export class ProductController {
     query: QueryProductSchemaType,
   ): Promise<FindAllProductSchemaReturnType> {
     return this.findAllProductUsecase.execute(query);
+  }
+
+  @Get('overview')
+  overview() {
+    return this.getDashboardOverviewUsecase.execute();
+  }
+
+  @Patch(':id/quantity')
+  @ApiOperation({
+    summary: 'Altera a quantidade de um produto pelo ID',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Quantidade do produto alterada com sucesso',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Produto não encontrado',
+  })
+  async changeQuantity(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body('quantity') quantity: number,
+  ): Promise<UpdateProductSchemaReturnType> {
+    return this.changeQuantityProductUsecase.execute(quantity, id);
   }
 
   @Get(':id')

@@ -9,6 +9,16 @@ export declare const FindByIdProductSchemaReturn: z.ZodObject<
     id: z.ZodUUID;
     createdAt: z.ZodDate;
     updatedAt: z.ZodDate;
+    category: z.ZodNullable<
+      z.ZodObject<
+        {
+          id: z.ZodString;
+          name: z.ZodString;
+          color: z.ZodNullable<z.ZodString>;
+        },
+        z.core.$strip
+      >
+    >;
   },
   z.core.$strip
 >;

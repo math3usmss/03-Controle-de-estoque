@@ -8,7 +8,8 @@
     "check": "pnpm --recursive check",
     "lint": "pnpm --recursive lint",
     "format": "pnpm --recursive format",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint-staged": "lint-staged --max-arg-length 7000"
   },
   "devDependencies": {
     "eslint": "^9.39.5",

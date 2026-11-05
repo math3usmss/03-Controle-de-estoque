@@ -36,3 +36,4 @@ __exportStar(require("./updateProduct.schema"), exports);
 __exportStar(require("./queryProduct.schema"), exports);
 __exportStar(require("./findByIdProduct.schema"), exports);
 __exportStar(require("./findAllProduct.schema"), exports);
+__exportStar(require("./dashboard.schema"), exports);

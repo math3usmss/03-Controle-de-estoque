@@ -1,5 +1,7 @@
 "use client";
 
+import { Package } from "lucide-react";
+
 import { ListPagination } from "@/components/common";
 import {
   EmptyState,
@@ -8,53 +10,96 @@ import {
 } from "@/components/common/states";
 
 import { useProducts } from "../../hooks";
-import { ListItemProduct } from ".";
+import { FilterProduct, ListItemProduct, SearchInput } from ".";
 
 interface ListProductsProps {
   page: number;
   setPage: (page: number) => void;
+  search: string;
+  setSearch: (search: string) => void;
+  categoryId: string | "all";
+  setCategoryId: (categoryId: string | "all") => void;
 }
 
-export default function ListProducts({ page, setPage }: ListProductsProps) {
-  const {
-    data: { products, limit, totalPages } = {},
-    isLoading,
-    isError,
-  } = useProducts(page);
+export default function ListProducts({
+  page,
+  setPage,
+  search,
+  setSearch,
+  categoryId,
+  setCategoryId,
+}: ListProductsProps) {
+  const { data, isLoading, isError } = useProducts(page, search, categoryId);
 
-  if (isLoading) {
-    return (
-      <LoadingState items={5}>
-        <div className="bg-muted h-16 animate-pulse rounded-md" />
-      </LoadingState>
-    );
-  }
-
-  if (isError) {
-    return <ErrorState title="Erro ao carregar produtos." />;
-  }
-
-  if (!products?.length) {
-    return <EmptyState title="Nenhum produto encontrado." />;
-  }
+  const { products = [], limit, totalPages = 0, total = 0 } = data ?? {};
 
   return (
-    <div className="w-full">
-      <ul className="flex flex-col gap-3">
-        {products.map((product) => (
-          <ListItemProduct key={product.id} product={product} />
-        ))}
-      </ul>
+    <div className="flex w-full flex-col gap-4">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-lg">
+            <Package className="size-5" />
+          </div>
 
-      {totalPages && totalPages > 1 && (
-        <div className="mt-3 flex justify-end">
-          <ListPagination
-            page={page}
-            setPage={setPage}
-            totalPages={totalPages}
-            limit={limit}
-          />
+          <div>
+            <h3 className="font-semibold">Produtos cadastrados</h3>
+
+            <p className="text-muted-foreground text-xs">
+              Visualize os produtos adicionados.
+            </p>
+          </div>
         </div>
+
+        <span className="bg-primary text-primary-foreground rounded-full px-3 py-1 text-sm font-semibold">
+          {total}
+        </span>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <SearchInput
+          value={search}
+          onChange={(value) => {
+            setSearch(value);
+            setPage(1);
+          }}
+          placeholder="Buscar produtos..."
+        />
+        <FilterProduct
+          value={categoryId}
+          onChange={(value) => {
+            setCategoryId(value);
+            setPage(1);
+          }}
+        />
+      </div>
+
+      {isLoading ? (
+        <LoadingState items={5}>
+          <div className="bg-muted h-16 animate-pulse rounded-md" />
+        </LoadingState>
+      ) : isError ? (
+        <ErrorState title="Erro ao carregar produtos." />
+      ) : products.length === 0 ? (
+        <EmptyState title="Nenhum produto encontrado." />
+      ) : (
+        <>
+          <ul className="flex flex-col gap-3">
+            {products.map((product) => (
+              <ListItemProduct key={product.id} product={product} />
+            ))}
+          </ul>
+
+          {totalPages > 1 && (
+            <div className="mt-3 flex justify-end">
+              <ListPagination
+                page={page}
+                setPage={setPage}
+                totalPages={totalPages}
+                limit={limit}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

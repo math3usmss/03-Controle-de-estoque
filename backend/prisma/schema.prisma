@@ -7,28 +7,29 @@ datasource db {
 	provider = "postgresql"
 }
 
+
 model Product {
-  id        String   @id @default(uuid())
+  id          String    @id @default(uuid())
 
-  name      String
+  name        String
   description String?
-  price     Float
-  quantity  Int
+  price       Float
+  quantity    Int
 
-  categoryId String?
-  categories Category[] @relation("CategoryProducts")
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Category {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
 
   name      String
   color     String?
 
-  products  Product[] @relation("CategoryProducts")
+  products  Product[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

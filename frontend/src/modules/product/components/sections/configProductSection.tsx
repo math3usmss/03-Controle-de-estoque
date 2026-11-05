@@ -1,23 +1,33 @@
 "use client";
 
-import { Package } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 import { CreateProduct, ListProducts } from "..";
 
 export default function ConfigProductSection() {
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [categoryId, setCategoryId] = useState<string | "all">("all");
 
   return (
     <section className="flex w-full flex-1 flex-col gap-6">
-      <div className="space-y-1">
-        <h2 className="text-2xl font-bold tracking-tight">
-          Configurações de Produtos
-        </h2>
+      <div className="flex items-center justify-between">
+        <div className="space-y-1">
+          <h2 className="text-2xl font-bold tracking-tight">
+            Configurações de Produtos
+          </h2>
 
-        <p className="text-muted-foreground text-sm">
-          Cadastre novos produtos e acompanhe os itens do estoque.
-        </p>
+          <p className="text-muted-foreground text-sm">
+            Cadastre novos produtos e acompanhe os itens do estoque.
+          </p>
+        </div>
+        <Link
+          href="/recharts"
+          className="bg-primary text-primary-foreground rounded-md px-2 py-1"
+        >
+          Ver dashboard de gráficos
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-6">
@@ -26,23 +36,14 @@ export default function ConfigProductSection() {
         </div>
 
         <div className="bg-card border-border min-w-0 rounded-xl border p-5 shadow-sm lg:col-span-4">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-lg">
-              <Package className="size-5" />
-            </div>
-
-            <div>
-              <h3 className="font-semibold">Produtos cadastrados</h3>
-
-              <p className="text-muted-foreground text-xs">
-                Visualize os produtos adicionados.
-              </p>
-            </div>
-          </div>
-
-          <div className="border-border border-t pt-4">
-            <ListProducts page={page} setPage={setPage} />
-          </div>
+          <ListProducts
+            page={page}
+            setPage={setPage}
+            search={search}
+            setSearch={setSearch}
+            categoryId={categoryId}
+            setCategoryId={setCategoryId}
+          />
         </div>
       </div>
     </section>
