@@ -15,7 +15,7 @@ model Product {
   price     Float
   quantity  Int
 
-  categoryId String
+  categoryId String?
   categories Category[] @relation("CategoryProducts")
 
   createdAt DateTime @default(now())

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import AxiosInstance from "@/lib/axios";
 
-export default function useCategories(page: number) {
+export default function useCategories(page?: number) {
   return useQuery({
     queryKey: ["categories", page],
 

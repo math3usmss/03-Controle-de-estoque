@@ -7,6 +7,7 @@ interface FieldFormProps extends Omit<ComponentProps<typeof Input>, "name"> {
   label: string;
   register: UseFormRegisterReturn;
   error?: string;
+  className?: string;
 }
 
 export default function FieldForm({
@@ -14,12 +15,13 @@ export default function FieldForm({
   register,
   error,
   id,
+  className,
   ...props
 }: FieldFormProps) {
   const inputId = id ?? register.name;
 
   return (
-    <div className="space-y-1">
+    <div className={`space-y-1 ${className}`}>
       <Label htmlFor={inputId} className="text-lg font-semibold">
         {label}
       </Label>

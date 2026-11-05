@@ -32,3 +32,4 @@ var __exportStar =
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./common/paginationQuery.schema"), exports);
 __exportStar(require("./schemas/category"), exports);
+__exportStar(require("./schemas/product"), exports);

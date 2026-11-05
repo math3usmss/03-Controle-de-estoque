@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui";
 import { ConfigCategorySection } from "@/modules/category/components/sections";
+import { ConfigProductSection } from "@/modules/product/components/sections";
 
 export default function ConfigTabs() {
   const [activeTab, setActiveTab] = useState<ConfigTab>("product");
@@ -28,7 +29,7 @@ export default function ConfigTabs() {
       </div>
 
       {activeTab === "category" && <ConfigCategorySection />}
-      {activeTab === "product" && <div>Produto Section</div>}
+      {activeTab === "product" && <ConfigProductSection />}
     </div>
   );
 }
